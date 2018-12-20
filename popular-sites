@@ -1,3 +1,8 @@
 #!/bin/bash
 
-for i in /opt/nginx/logs/*access.log ; do if [ $(wc -l $i | cut -d ' ' -f 1) -gt 0 ] ; then echo -n "$i  " ; sudo cut -d ' ' -f 10 $i | paste -sd+ - | bc ; fi ; done
+for i in $@ ; do
+    if [ $(wc -l $i | cut -d ' ' -f 1) -gt 0 ] ; then
+        echo -n "$i  "
+        sudo cut -d ' ' -f 10 $i | paste -sd+ - | bc
+    fi
+done
